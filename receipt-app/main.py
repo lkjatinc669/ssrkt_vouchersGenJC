@@ -326,7 +326,7 @@ class App():
 
 if __name__ == '__main__':
     root = Tk()
-    root.title("Reciept")
+    root.title("Voucher Generator JC")
     root.geometry("870x500")
     App(root)
     root.mainloop()
