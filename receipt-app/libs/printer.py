@@ -25,7 +25,7 @@ class Printer():
         pdf.set_font('Arial', 'B', 12)
         pdf.cell(w = 110, h = 8, txt="Seva Sadan's", align="C")
         pdf.set_font('Arial', '', 10)
-        pdf.cell(w = 40, h = 8, txt=f"Voucher No JC:  {self._voucherNo}")
+        pdf.cell(w = 40, h = 8, txt=f"Voucher No (JC) :  {self._voucherNo}")
         pdf.ln(7)
         pdf.set_font('Arial', 'B', 22)
         pdf.cell(w = 190, h = 10, txt="R. K. Talreja College", align="C")
@@ -84,9 +84,10 @@ class Printer():
         pdf.cell(w = 190, h = 1, txt="", fill=True, align="C")
 
         pdf.ln(3)
-        pdf.cell(w = 45, h = 8, txt="Sanctioned By", align="C")
+        pdf.set_font('Arial', 'B', 10)
+        pdf.cell(w = 40, h = 8, txt="Sanctioned By", align="C")
         pdf.cell(w = 50, h = 8, txt="Prepared By", align="C")
-        pdf.cell(w = 45, h = 8, txt="Checked By", align="C")
+        pdf.cell(w = 50, h = 8, txt="Checked By", align="C")
         pdf.cell(w = 50, h = 8, txt="Recievers Signature", align="C")
 
         pdf.ln(3)
@@ -95,11 +96,10 @@ class Printer():
         pdf.cell(w = 60, h = 8, txt="", align="C")
 
         pdf.ln(8)
-        pdf.set_font('Arial', 'B', 10)
-        pdf.cell(w = 45, h = 8, txt="Principal", align="C")
+        pdf.cell(w = 40, h = 8, txt="Principal", align="C")
         pdf.set_font('Arial', 'BU', 10)
         pdf.cell(w = 50, h = 8, txt="                                 ", align="C")
-        pdf.cell(w = 45, h = 8, txt="                                 ", align="C")
+        pdf.cell(w = 50, h = 8, txt="                                 ", align="C")
         pdf.cell(w = 50, h = 8, txt="                                 ", align="C")
 
         pdf.ln(10)

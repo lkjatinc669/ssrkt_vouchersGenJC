@@ -22,7 +22,6 @@ cdbCursor = connection.cursor()
 cdbCursor.execute(f"CREATE DATABASE {database}")
 print("Created")
 
-
 print("Attempting Connection to Database", end="")
 for x in range(7):print(".", end="");time.sleep(1)
 connection = mysql.connector.connect(host=hostname, user=username, password=password, database=database)
@@ -70,7 +69,7 @@ mycursor.execute("""
         3,
         'Three',
         'Dummy',
-        '234',
+        'None',
         '5446'
     )"""
 )

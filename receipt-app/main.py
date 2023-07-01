@@ -5,10 +5,9 @@ import json
 import datetime
 from libs import wordGen
 from database import initialize
+from database import connChecker
 from libs import listUpdater
 from libs import printer
-
-listUpdater
 
 class App():
     def __init__(self, master):
@@ -17,10 +16,16 @@ class App():
         self.master = master
 
         self.loadList()
-        self.dbConnStatics = self.getDBStatics()
         self.currtime = self.getCurrTime()
 
         self.cashorbank = ["Cash", "Bank"]
+
+        data = self.getDBStatics()
+        connes = connChecker.Checker(data[0], data[1], data[2], data[3]).connCheck()
+        if connes[0] == False:
+            messagebox.showerror("Error", connes[1])
+            self.master.destroy()
+            return None
 
         self.stringVar_voucherNoS = StringVar()
         self.stringVar_voucherNo = StringVar()
@@ -34,15 +39,17 @@ class App():
         self.stringVar_byCCNo = StringVar()
         self.stringVar_bankAccNo = StringVar()
         self.stringVar_onDate = StringVar()
+        
+        self.dbConnStatics = self.getDBStatics()
 
         self.topBanner1 = Label(self.master, text="Seva Sadan's", width=110)
         self.topBanner1.place(x=10, y=10)
         self.topBannerDate = Label(self.master, text=f"Date: {self.currtime}")
         self.topBannerDate.place(x=10, y=10)
-        self.topBannerVoucherL = Label(self.master, text=f"Voucher No: ")
-        self.topBannerVoucherL.place(x=730, y=10)
+        self.topBannerVoucherL = Label(self.master, text=f"Voucher No (JC): ")
+        self.topBannerVoucherL.place(x=730-20, y=10)
         self.topBannerVoucherE = Entry(self.master, textvariable=self.stringVar_voucherNo, width=5, state="disabled")
-        self.topBannerVoucherE.place(x=815, y=10)
+        self.topBannerVoucherE.place(x=815, y=11)
         self.topBanner2 = Label(self.master, text="R. K. Talreja College", width=110)
         self.topBanner2.place(x=10, y=40)
         self.topBanner3 = Label(self.master, text="Arts, Science and Commerce", width=110)
@@ -66,7 +73,7 @@ class App():
         self.accHeadL = Label(self.master, text="Account Head")
         self.accHeadL.place(x=10, y=self.y)
         # self.accHeadO = OptionMenu(self.master, textvariable=self.stringVar_accHead, *self.accountHeadOptList, command = self.changedetector)
-        self.accHeadO = ttk.Combobox(root, textvariable=self.stringVar_accHead, state='readonly', values=self.accountHeadOptList)
+        self.accHeadO = ttk.Combobox(self.master, textvariable=self.stringVar_accHead, state='readonly', values=self.accountHeadOptList)
         self.accHeadO.place(x=150, y=self.y-5)
         self.accHeadO.bind("<<ComboboxSelected>>", self.changedetector)
 
@@ -266,7 +273,7 @@ class App():
             self.rupeesNoE.insert(0, data[4])
             self.rupeesTxtE.insert(0, data[5])
             self.accountOfE.insert(0, data[6])
-            self.byCCNoE.insert(0, data[7])
+            self.stringVar_byCCNo.set(data[7])
             self.bankAccNoE.insert(0, data[8])
             self.onDateE.config(state="normal")
             self.onDateE.insert(0, data[9])
