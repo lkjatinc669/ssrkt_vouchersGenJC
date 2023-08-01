@@ -1,4 +1,4 @@
 @echo off
 cd receipt-app
-python main.py
+start python main.py
 cd ..
